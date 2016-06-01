@@ -5,12 +5,12 @@ include( __DIR__ . "/config.php" );
 /*********** Instanciate staticDB base class *************/
 $staticdb = new \system_base\staticdb(ACCESS_POINT, DATA_DIR_LOCATION, DATA_DIR);
 
+/* The below data is for demonstrating example data */
 $exampleCategory = 'MARKETPLACE';
 $exampleCell = 'items';
 $cell_data = '{"rating" : "5"}';
 $cell_data_item = "review";
-
-echo "<pre>";
+/****************************************************/
 
 ##############################################################
 ## Select a particular cell under a category, if the cell is not available then this method attemp to create if the trird param is true
@@ -80,8 +80,10 @@ $cell_status = $staticdb->cell_data_item_remove($cell_data_item, $exampleCategor
 ##############################################################
 
 ##############################################################
-# Remove an existing item from cell data, return true if removed or
+# get the status of last operation
 $status = $staticdb->get_status();
+
+# Display the status of last operation
 var_dump($status);
 ##############################################################
 ?>
