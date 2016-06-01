@@ -97,6 +97,38 @@ class staticdb {
         return is_dir($physical_dir_location) && file_exists($physical_cell_location);
     }
     
+    ## Start File Operation Methods ##
+    /**
+     * Save cell data
+     * @param type $physical_cell_location
+     * @param type $result
+     * @return type
+     */
+    public function save_cell_data($physical_cell_location, $result) {
+        $handle = fopen($physical_cell_location, "w+");
+        fwrite($handle, $result);
+        return fclose($handle);
+    }
+
+    /**
+     * Create category 
+     * @param type $category
+     * @return type
+     */
+    public function create_physical_category($category) {
+        return mkdir($category);
+    }
+    
+    /**
+     * Remove category 
+     * @param type $category
+     * @return type
+     */
+    public function remove_physical_category($category) {
+        return rmdir($category);
+    }
+    ## End File Operation Methods ##
+    
     /**
      * Select a cell and return the cell related value
      * @param type $data_category
@@ -204,8 +236,12 @@ class staticdb {
             $this->physical_dir_location, $this->physical_cell_location
         );
     }
-
     
+    /**
+     * Create data category so we can save multiple cell inside category
+     * @param type $data_category
+     * @return boolean
+     */
     public function create_data_category($data_category = '') {
         $data_category = trim($data_category);
         if($data_category == '') {
@@ -217,7 +253,7 @@ class staticdb {
         list($physical_dir_location) = $this->get_physical_location();
 
         if(!is_dir($physical_dir_location)) {
-            if(!mkdir($physical_dir_location)) {
+            if(!$this->create_physical_category($physical_dir_location)) {
                 $this->set_status( \system_base\status::$STATUS_CANNOT_CREATE_DIR );
                 return false;
             }
@@ -250,7 +286,7 @@ class staticdb {
             return false;
         
         if(!is_dir($physical_dir_location)) {
-            if(!mkdir($physical_dir_location)) {
+            if(!$this->create_physical_category($physical_dir_location)) {
                 $this->set_status( \system_base\status::$STATUS_CANNOT_CREATE_DIR );
                 return false;
             }
@@ -313,7 +349,7 @@ class staticdb {
                 return false;
             }
             else {
-                rmdir($physical_dir_location);
+                $this->remove_physical_category($physical_dir_location);
                 return true;
             }       
         }
@@ -364,11 +400,9 @@ class staticdb {
         }
 
         list($physical_dir_location, $physical_cell_location) = $cell_details;
+        
         # Replace the existing content
-        $handle = fopen($physical_cell_location, "w+");
-        fwrite($handle, $json_data);
-        fclose($handle);
-        return true;
+        return $this->save_cell_data($physical_cell_location, $json_data);
     }
 
     /**
@@ -438,13 +472,8 @@ class staticdb {
         #Convert new data into JSON formt
         $result = json_encode($result);
 
-        #Write back the new data into cell
-        $handle = fopen($physical_cell_location, "w+");
-        fwrite($handle, $result);
-        fclose($handle);
-
-        #once everthing done return status
-        return true;
+        #Write back the new data into cell and once everthing done return status
+        return $this->save_cell_data($physical_cell_location, $result);
     }
     
     /**
@@ -480,19 +509,16 @@ class staticdb {
             #Convert new data into JSON formt
             $result = json_encode($cell_data);
 
-            #Write back the new data into cell
-            $handle = fopen($physical_cell_location, "w+");
-            fwrite($handle, $result);
-            fclose($handle);
-            
+            #Write back the new data into cell           
             $this->set_status( \system_base\status::$STATUS_REMOVE_ITEM_SUCESS );
+            
+            #once everthing done return status
+            return $this->save_cell_data($physical_cell_location, $result); 
         }
         else {
             $this->set_status( \system_base\status::$STATUS_REMOVE_ITEM_FAILED );
+            return true;
         }
-        
-        #once everthing done return status
-        return true;
     }
 }
 ?>
