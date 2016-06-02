@@ -1,6 +1,6 @@
 <?php
 /*********** Config Start *************/
-include( __DIR__ . "/config.php" );
+require_once( __DIR__ . "/config.php" );
 
 /*********** Instanciate staticDB base class *************/
 $staticdb = new \system_base\staticdb(ACCESS_POINT, DATA_DIR_LOCATION, DATA_DIR);
