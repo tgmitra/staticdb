@@ -17,6 +17,7 @@ class staticdb {
         $this->path = $path;
         $this->base_url = $base_url;
         $this->data_dir = $data_dir;
+        $this->data_operation = new \data_operation\dataOperation();
     }
 
     
@@ -94,40 +95,9 @@ class staticdb {
      */
     public function validate_physical_location() {
         list($physical_dir_location, $physical_cell_location) = $this->get_physical_location();
-        return is_dir($physical_dir_location) && file_exists($physical_cell_location);
-    }
-    
-    ## Start File Operation Methods ##
-    /**
-     * Save cell data
-     * @param type $physical_cell_location
-     * @param type $result
-     * @return type
-     */
-    public function save_cell_data($physical_cell_location, $result) {
-        $handle = fopen($physical_cell_location, "w+");
-        fwrite($handle, $result);
-        return fclose($handle);
+        return is_dir($physical_dir_location) && $this->data_operation->cell_exists($physical_cell_location);
     }
 
-    /**
-     * Create category 
-     * @param type $category
-     * @return type
-     */
-    public function create_physical_category($category) {
-        return mkdir($category);
-    }
-    
-    /**
-     * Remove category 
-     * @param type $category
-     * @return type
-     */
-    public function remove_physical_category($category) {
-        return rmdir($category);
-    }
-    ## End File Operation Methods ##
     
     /**
      * Select a cell and return the cell related value
@@ -176,19 +146,19 @@ class staticdb {
         
         list($physical_dir_location, $physical_cell_location) = $this->get_physical_location();
         
-        if(!file_exists($physical_cell_location))
+        if(!$this->data_operation->cell_exists($physical_cell_location))
             return false;
         
-        if(file_exists($physical_cell_location))
-            $last_update_time = date ("YmdHis", filemtime($physical_cell_location));
+        if($this->data_operation->cell_exists($physical_cell_location))
+            $last_update_time = date ("YmdHis", $this->data_operation->check_last_update($physical_cell_location));
         else
             return false;
         
         if($show_only_url)
-            return $this->getCellURL('', '', $last_update_time);
+            return $this->get_cell_url('', '', $last_update_time);
         
         $result = array(
-            'file_url' => $this->getCellURL('', '', $last_update_time),
+            'file_url' => $this->get_cell_url('', '', $last_update_time),
             'last_modification' => $last_update_time
         );
         
@@ -200,7 +170,7 @@ class staticdb {
      * @param type $last_update_time
      * @return type
      */
-    public function getCellURL($data_category = '', $data_cell = '', $last_update_time='') {
+    public function get_cell_url($data_category = '', $data_cell = '', $last_update_time='') {
         
         if($data_category <> '' && $data_cell <> '') {            
             if(!$cell_details = $this->validate_and_select_cell($data_category, $data_cell, true)) {
@@ -253,7 +223,7 @@ class staticdb {
         list($physical_dir_location) = $this->get_physical_location();
 
         if(!is_dir($physical_dir_location)) {
-            if(!$this->create_physical_category($physical_dir_location)) {
+            if(!$this->data_operation->create_physical_category($physical_dir_location)) {
                 $this->set_status( \system_base\status::$STATUS_CANNOT_CREATE_DIR );
                 return false;
             }
@@ -286,7 +256,7 @@ class staticdb {
             return false;
         
         if(!is_dir($physical_dir_location)) {
-            if(!$this->create_physical_category($physical_dir_location)) {
+            if(!$this->data_operation->create_physical_category($physical_dir_location)) {
                 $this->set_status( \system_base\status::$STATUS_CANNOT_CREATE_DIR );
                 return false;
             }
@@ -343,13 +313,13 @@ class staticdb {
                    $itemNum++;
             }
             $d->close();  
-            
+
             if($itemNum > 0) {
                 $this->set_status( \system_base\status::$STATUS_CATEGORY_NOT_EMPTY );
                 return false;
             }
             else {
-                $this->remove_physical_category($physical_dir_location);
+                $this->data_operation->remove_physical_category( $physical_dir_location );
                 return true;
             }       
         }
@@ -402,7 +372,7 @@ class staticdb {
         list($physical_dir_location, $physical_cell_location) = $cell_details;
         
         # Replace the existing content
-        return $this->save_cell_data($physical_cell_location, $json_data);
+        return $this->data_operation->save_cell_data($physical_cell_location, $json_data);
     }
 
     /**
@@ -473,7 +443,7 @@ class staticdb {
         $result = json_encode($result);
 
         #Write back the new data into cell and once everthing done return status
-        return $this->save_cell_data($physical_cell_location, $result);
+        return $this->data_operation->save_cell_data($physical_cell_location, $result);
     }
     
     /**
@@ -513,7 +483,7 @@ class staticdb {
             $this->set_status( \system_base\status::$STATUS_REMOVE_ITEM_SUCESS );
             
             #once everthing done return status
-            return $this->save_cell_data($physical_cell_location, $result); 
+            return $this->data_operation->save_cell_data($physical_cell_location, $result); 
         }
         else {
             $this->set_status( \system_base\status::$STATUS_REMOVE_ITEM_FAILED );

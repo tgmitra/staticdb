@@ -1,6 +1,7 @@
 <?php
-include( __DIR__ . "/staticdb/system.status.class.php" );
-include( __DIR__ . "/staticdb/staticdb.base.class.php" );
+require_once( __DIR__ . "/staticdb/system.status.class.php" );
+require_once( __DIR__ . "/staticdb/staticdb.data.operation.class.php" );
+require_once( __DIR__ . "/staticdb/staticdb.base.class.php" );
 
 define("ACCESS_POINT", "http://localhost/staticdb/");
 define("DATA_DIR", "data/");
