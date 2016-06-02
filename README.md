@@ -44,7 +44,7 @@ writable, now open the config file ( config.php ) and do the following modificat
     1. Make sure the ACCESS_POINT is correct, if needed adjust this as per your system settings, this is what we are 
         going to use for accessing each data cell using HTTP method.
 
-    2. After ACCESS_POINT the DATA_DIR is very important, as this is where we are storing all data categories and cells.
+    2. DATA_DIR is the name of directory where we are storing all data categories and cells.
 
-    3. DATA_DIR_LOCATION, as per the system you are using, this is the physical path of DATA_DIR where all data category
-        and cells available. 
+    3. DATA_DIR_LOCATION, as per the system you are using, this is the physical path of DATA_DIR where all data 
+        category and cells available. 
