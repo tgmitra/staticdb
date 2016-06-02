@@ -10,10 +10,10 @@ good chunk of data to display on your application or website.
 
 ## Installation
 
-Drag and drop the **/staticdb**,  **/data**, **config.php** and **index.php** (optional) files and directories into your application's directories. 
+Drag and drop the **/staticdb**,  **/data**, **config.php** and **example.php** (optional) files and directories into your application's directories. 
 To use add `require_once( __DIR__ . "/config.php" );` at the top of your controllers to load it into the scope. 
-Additionally, as mentioned in index.php use `$staticdb = new \system_base\staticdb(ACCESS_POINT, DATA_DIR_LOCATION, DATA_DIR);` 
-where ever you want to use the `statucdb` functions, you may follow the example available in `index.php`
+Additionally, as mentioned in example.php use `$staticdb = new \system_base\staticdb(ACCESS_POINT, DATA_DIR_LOCATION, DATA_DIR);` 
+where ever you want to use the `statucdb` functions, you may follow the example available in `example.php`
 
 Also make sure the directory **/data** have necessary write permission.
 
@@ -84,5 +84,5 @@ cell is not available then this method attempt to create if the third parameter 
 
 **staticdb->cell_data_item_remove(** _$cellDataItem, $exampleCategory, $exampleCell_ **)** : Remove an existing item from cell data, return true if removed or item not vailable, or false if category / cell is invalid
 
-**$staticdb->get_status()** : This methods returns the status of last operation
+**$staticdb->get_status()** : This method return the status of last operation.
 
