@@ -41,9 +41,10 @@ This overview is intended to give a high-level introduction of key features and 
 First install the StaticDB as mentioned above, once installation is done make sure the **/data** directory is 
 writable, now open the config file ( config.php ) and do the following modification
 
-    1. Make sure the ACCESS_POINT is correct, if needed adjust this as per your system settings, this is what we are going to use 
-        for accessing each data cell using HTTP method.
+    1. Make sure the ACCESS_POINT is correct, if needed adjust this as per your system settings, this is what we are 
+        going to use for accessing each data cell using HTTP method.
 
     2. After ACCESS_POINT the DATA_DIR is very important, as this is where we are storing all data categories and cells.
 
-    3. DATA_DIR_LOCATION, as per the system you are using, this is the physical path of DATA_DIR where all data category and cells available. 
+    3. DATA_DIR_LOCATION, as per the system you are using, this is the physical path of DATA_DIR where all data category
+        and cells available. 
