@@ -57,4 +57,4 @@ ever and where ever you need.
 
 Now use the `$staticdb` variable to access the StaticDB following methods.
 
-**$staticdb->select_cell( _exampleCategory_, _exampleCell_ )** : Select a particular cell under a category, if the cell is not available then this method attempt to create if the third parameter is true
+**$staticdb->select_cell(** _$exampleCategory_, _$exampleCell_ **)** : Select a particular cell under a category, if the cell is not available then this method attempt to create if the third parameter is true
