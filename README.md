@@ -13,7 +13,7 @@ good chunk of data to display on your application or website.
 Drag and drop the **/staticdb**,  **/data**, **config.php** and **example.php** (optional) files and directories into your application's directories. 
 To use add `require_once( __DIR__ . "/config.php" );` at the top of your controllers to load it into the scope. 
 Additionally, as mentioned in example.php use `$staticdb = new \system_base\staticdb(ACCESS_POINT, DATA_DIR_LOCATION, DATA_DIR);` 
-where ever you want to use the `statucdb` functions, you may follow the example available in `example.php`
+where ever you want to use the `statucdb` functions, you may follow the examples available in `example.php`
 
 Also make sure the directory **/data** have necessary write permission.
 
@@ -74,7 +74,7 @@ cell is not available then this method attempt to create if the third parameter 
 
 **$staticdb->get_cell_status()** : Once the cell is selected this returns the cell status, otherwise the output is same as select_cell()
 
-**$staticdb->getCellURL()** : Get the cell URL if cell exists
+**$staticdb->get_cell_url()** : Get the cell URL if cell exists
 
 **$staticdb->cell_data_insert(** _$cellData, $exampleCategory, $exampleCell_ **)** : Insert data into cell, but before insert data cell needs to available, else return false
 
@@ -85,4 +85,7 @@ cell is not available then this method attempt to create if the third parameter 
 **staticdb->cell_data_item_remove(** _$cellDataItem, $exampleCategory, $exampleCell_ **)** : Remove an existing item from cell data, return true if removed or item not vailable, or false if category / cell is invalid
 
 **$staticdb->get_status()** : This method return the status of last operation.
+
+`Please Note: File or data operations are done on the file staticdb/staticdb.data.operation.class.php , so if you like to switch a new 
+file server, or want to use CDN / lightTPD, feel free to update this file with your required settings.`
 
