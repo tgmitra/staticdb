@@ -6,29 +6,11 @@ require_once( __DIR__ . "/config.php" );
 $staticdb = new \system_base\staticdb(ACCESS_POINT, DATA_DIR_LOCATION, DATA_DIR);
 
 /* The below data is for demonstrating example data */
-$exampleCategory = 'MARKETPLACE';
+$exampleCategory = 'ARTICLES';
 $exampleCell = 'items';
 $cell_data = '{"rating" : "5"}';
 $cell_data_item = "review";
 /****************************************************/
-
-##############################################################
-## Select a particular cell under a category, if the cell is not available then this method attemp to create if the trird param is true
-$staticdb->select_cell($exampleCategory, $exampleCell);
-##############################################################
-
-
-
-##############################################################
-## Once the cell is selected this returns the cell status, otherwise the output is same as select_cell()
-$staticdb->get_cell_status();
-##############################################################
-
-
-##############################################################
-## Get only cell URL if cell exists
-$staticdb->getCellURL();
-##############################################################
 
 
 ##############################################################
@@ -41,7 +23,6 @@ $staticdb->create_data_category( $exampleCategory );
 ## Create a new data cell, return false if unable to create or return true, even if the cell already exists
 $staticdb->create_data_cell($exampleCategory, $exampleCell);
 ##############################################################
-
 
 
 ##############################################################
@@ -57,30 +38,48 @@ $staticdb->remove_category($exampleCategory);
 
 
 ##############################################################
+## Select a particular cell under a category, if the cell is not available then this method attemp to create if the trird param is true
+$staticdb->select_cell($exampleCategory, $exampleCell);
+##############################################################
+
+
+##############################################################
+## Once the cell is selected this returns the cell status, otherwise the output is same as select_cell()
+$staticdb->get_cell_status();
+##############################################################
+
+
+##############################################################
+## Get the cell URL if cell exists
+$staticdb->get_cell_url();
+##############################################################
+
+
+##############################################################
 # Insert data into cell, but before insert data cell needs to available, else return false
-$staticdb->cell_data_insert($cell_data, $exampleCategory, $exampleCell);
+$staticdb->cell_data_insert($cellData, $exampleCategory, $exampleCell);
 ##############################################################
 
 
 ##############################################################
-# Remove all data from cell leaving cell intact
+# Remove all data from selected cell, leaving the empty cell intact
 $staticdb->cell_data_delete($exampleCategory, $exampleCell);
 ##############################################################
 
 
 ##############################################################
 # Merge a new data with existing cell data
-$staticdb->cell_data_merge($cell_data, $exampleCategory, $exampleCell);
+$staticdb->cell_data_merge($cellData, $exampleCategory, $exampleCell);
 ##############################################################
 
 
 ##############################################################
 # Remove an existing item from cell data, return true if removed or item not vailable, or false if category / cell is invalid
-$staticdb->cell_data_item_remove($cell_data_item, $exampleCategory, $exampleCell);
+$staticdb->cell_data_item_remove($cellDataItem, $exampleCategory, $exampleCell);
 ##############################################################
 
 ##############################################################
-# get the status of last operation
+# This methods returns the status of last operation
 $status = $staticdb->get_status();
 
 # Display the status of last operation
