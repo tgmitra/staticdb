@@ -32,7 +32,7 @@ as MySQL but not in StaticDB or incase if this is secured data for which you nee
 ## Its a data store for the web
 
 StaticDB is a data store that completely embraces the web. Store your data with JSON documents. Access your documents 
-with your web browser via HTTP. Index, combine, and transform your data store documents with JavaScript. This works well 
+with your web browser via HTTP. Combine, and transform your data store documents with JavaScript. This works well 
 with all modern web and mobile apps. You can even serve web apps directly out of StaticDB. And you can distribute your 
 data, or your apps efficiently using StaticDB.
 
