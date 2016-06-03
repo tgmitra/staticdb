@@ -61,25 +61,25 @@ Now use the `$staticdb` variable to access the StaticDB following methods.
 
 
 **$staticdb->create_data_category(** _$categoryName_ **)** : Create a new data category, return true if successful or 
-the category already exists else return false
+the category already exists else return false.
 
-**$staticdb->create_data_cell(** _$categoryName, $cellName_ **)** : Create a new data cell, return false if unable to create or return true, 
-even if the cell already exists
+**$staticdb->create_data_cell(** _$categoryName, $cellName_ **)** : Create a new data cell, return false if unable to create or return true
+even if the cell already exists.
 
-**$staticdb->remove_cell(** _$categoryName, $cellName_ **)** : If cell is available then remove the data cell and return true or return false 
+**$staticdb->remove_cell(** _$categoryName, $cellName_ **)** : If cell is available then remove the data cell and return true or return false.
 
-**$staticdb->remove_category(** _$categoryName_ **)** : Remove an existing category, this will work only if the category is empty
+**$staticdb->remove_category(** _$categoryName_ **)** : Remove an existing category, this will work only if the category is empty,
 
 **$staticdb->select_cell(** _$categoryName_, $cellName, true_ **)** : Select a data cell under category, if in case the 
-data cell is not available then this method attempt to create if the third parameter is true
+data cell is not available then this method attempt to create if the third parameter is true.
 
-**$staticdb->get_cell_status()** : Once the cell is selected this returns the cell status, otherwise the output is same as select_cell()
+**$staticdb->get_cell_status()** : Once the cell is selected this returns the cell status, otherwise the output is same as select_cell().
 
-**$staticdb->get_cell_url()** : Get the cell URL if cell exists or return false
+**$staticdb->get_cell_url()** : Get the cell URL if cell exists or return false.
 
-**$staticdb->cell_data_insert(** _$cellData, $categoryName, $cellName_ **)** : Insert data into an existing cell by removing all existing data before insert, return false if cell is not available
+**$staticdb->cell_data_insert(** _$cellData, $categoryName, $cellName_ **)** : Insert data into an existing cell by removing all existing data before insert, return false if cell is not available.
 
-**$staticdb->cell_data_delete(** _$categoryName, $cellName_ **)** : Remove all data from selected cell leaving the empty cell intact
+**$staticdb->cell_data_delete(** _$categoryName, $cellName_ **)** : Remove all data from selected cell leaving the empty cell intact.
 
 **$staticdb->cell_data_merge(** _$cellData, $categoryName, $cellName_ **)** : Similar to insert but instead or removing existing cell
 data before adding new data, this method merge the new cell data with old existing data.
