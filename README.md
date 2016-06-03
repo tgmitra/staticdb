@@ -25,10 +25,9 @@ the data in JSON format which is directly accessible using HTTP clients.
 
 Here you can even use lightTPD or even external CDN to keep the data cells and then delivered to destination, whether destination
 is your browser or mobile application this data transfer can be done with very minimum utilization of your server resources. 
-Considering each data cell is nothing but a separate file itself, and directly sending the file over HTTP method don't utilize 
+Considering each data cell is nothing but a separate file itself, and directly sending the file over HTTP don't utilize 
 much of your server resources unless you are processing the data before delivery, which is happening in all databases such 
-as MySQL or if this is secured data for which you need some special authentication, to handle this situation we don't recommend 
-to use StaticDB.
+as MySQL but not in StaticDB or incase if this is secured data for which you need some special authentication.
 
 ## Its a data store for the web
 
@@ -64,7 +63,7 @@ Now use the `$staticdb` variable to access the StaticDB following methods.
 **$staticdb->create_data_category(** _$categoryName_ **)** : Create a new data category, return false if unable to create or return true even if 
 the category already exists
 
-**$staticdb->create_data_cell(** _$categoryName, $exampleCell_ **)** : Create a new data cell, return false if unable to create or return true, 
+**$staticdb->create_data_cell(** _$categoryName, $cellName_ **)** : Create a new data cell, return false if unable to create or return true, 
 even if the cell already exists
 
 **$staticdb->remove_cell(** _$categoryName, $cellName_ **)** : If available then remove an existing data cell and return true, 
