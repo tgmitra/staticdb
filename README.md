@@ -89,7 +89,7 @@ cell is not available then this method attempt to create if the third parameter 
 
 **$staticdb->get_status()** : This method return the status of last operation.
 
-    **Please Note:** Data operations are done separately on the class file staticdb/staticdb.data.operation.class.php, 
+    Please Note: Data operations are done separately on the class file staticdb/staticdb.data.operation.class.php, 
     so if you like to switch to a new file server, or want to use CDN / lightTPD, feel free to update this file 
     with your required settings.
 
