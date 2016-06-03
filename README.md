@@ -1,6 +1,6 @@
-# JSON based lightweight database
+# JSON based lightweight data store
 
-StaticDB is a small PHP based database which can be access directly from your storage system or CDN using browser or app, 
+StaticDB is a small PHP based data store which can be access directly from your storage system or CDN using browser or app, 
 the server authentication is optional so without using your server resource browser or end user can access 
 good chunk of data to display on your application or website.
 
@@ -19,18 +19,21 @@ Also make sure the directory **/data** have necessary write permission.
 
 ## Why StaticDB?
 
-Unlike the usual database tables the concept of StaticDB is slightly different, as instead of structure like table, which means 
-combination of rows and columns this StaticDB have categories and inside each categories data cells are available, which is 
-directly accessible using HTTP clients.
+Unlike the usual database tables the concept of StaticDB is slightly different, instead of structure like table, which is 
+combination of rows and columns this StaticDB have categories and inside each categories cells are available, each cell holds 
+the data in JSON format which is directly accessible using HTTP clients.
 
-Here you can even use lightTPD or even external CDN to keep the data cells and then delivered to destination, whether this 
-is your browser or mobile application this data transfer can be done without utilizing your server resource 
-unless this is secured data for which you need some special authentication, for which we don't recommend to use StaticDB.
+Here you can even use lightTPD or even external CDN to keep the data cells and then delivered to destination, whether destination
+is your browser or mobile application this data transfer can be done with very minimum utilization of your server resources. 
+Considering each data cell is nothing but a separate file itself, and directly sending the file over HTTP method don't utilize 
+much of your server resources unless you are processing the data before delivery, which is happening in all databases such 
+as MySQL or if this is secured data for which you need some special authentication, to handle this situation we don't recommend 
+to use StaticDB.
 
-## Its a database for the web
+## Its a data store for the web
 
-StaticDB is a database that completely embraces the web. Store your data with JSON documents. Access your documents 
-with your web browser via HTTP. Index, combine, and transform your database documents with JavaScript. This works well 
+StaticDB is a data store that completely embraces the web. Store your data with JSON documents. Access your documents 
+with your web browser via HTTP. Index, combine, and transform your data store documents with JavaScript. This works well 
 with all modern web and mobile apps. You can even serve web apps directly out of StaticDB. And you can distribute your 
 data, or your apps efficiently using StaticDB.
 
@@ -86,7 +89,7 @@ cell is not available then this method attempt to create if the third parameter 
 
 **$staticdb->get_status()** : This method return the status of last operation.
 
-    Please Note: Data operations are done separately on the class file staticdb/staticdb.data.operation.class.php, 
+    **Please Note:** Data operations are done separately on the class file staticdb/staticdb.data.operation.class.php, 
     so if you like to switch to a new file server, or want to use CDN / lightTPD, feel free to update this file 
     with your required settings.
 
