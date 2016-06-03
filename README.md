@@ -70,7 +70,7 @@ even if the cell already exists.
 
 **$staticdb->remove_category(** _$categoryName_ **)** : Remove an existing category, this will work only if the category is empty,
 
-**$staticdb->select_cell(** _$categoryName_, $cellName, true_ **)** : Select a data cell under category, if in case the 
+**$staticdb->select_cell(** _$categoryName, $cellName, true_ **)** : Select a data cell under category, if in case the 
 data cell is not available then this method attempt to create if the third parameter is true.
 
 **$staticdb->get_cell_status()** : Once the cell is selected this returns the cell status, otherwise the output is same as select_cell().
